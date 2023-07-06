@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <div className="shadow-sm bg-white border-b sticky top-0 z-50">
       {/* Header Component */}
-      <header className="flex justify-between items-center px-3    max-w-6xl mx-auto">
+      <header  className=" flex justify-between items-center px-3    max-w-6xl mx-auto">
         {/* Div Containing Logo */}
         <div
           //  OnCLick Command to navigate to requested EndPoint
@@ -36,9 +36,9 @@ const Header = () => {
           <ul className="flex items-center space-x-10 ">
             {/* Home page */}
             <li
-              className={` cursor-pointer py-5 text-sm font-semibold text-gray-400 border-b-[3px]
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-700 border-b-[3px]
                border-b-transparent 
-               ${pathMathRoute("/") ? "text-black border-b-red-500 " : ""}`}
+               ${pathMathRoute("/") && "text-black border-b-blue-500 "}`}
               //  OnCLick Command to navigate to requested EndPoint
               onClick={() => navigate("/")}
             >
@@ -46,22 +46,19 @@ const Header = () => {
             </li>
             {/* Offers Page */}
             <li
-              className={`cursor-pointer py-5 text-sm font-semibold text-gray-400 border-b-[3px]
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-700 border-b-[3px]
                border-b-transparent 
-               ${
-                 pathMathRoute("/offers") ? "text-black border-b-red-500" : ""
-               }`}
+                ${pathMathRoute("/offers") && "text-black border-b-blue-500"}`}
               onClick={() => navigate("/offers")}
             >
               Offers
             </li>
-            {/* Profile Page */}
+            {/* Sign In Page */}
             <li
-              className={`cursor-pointer py-5 text-sm font-semibold text-gray-400 border-b-[3px]
+              className={`cursor-pointer py-3 text-sm font-semibold
+               text-gray-700 border-b-[3px]
                border-b-transparent 
-               ${
-                 pathMathRoute("/profile") ? "text-black border-b-red-500" : ""
-               }`}
+               ${pathMathRoute("/sign-in") && "text-black border-b-blue-500"}`}
               onClick={() => navigate("/sign-in")}
             >
               Sign In
