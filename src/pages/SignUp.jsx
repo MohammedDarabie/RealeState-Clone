@@ -13,21 +13,31 @@ import {toast} from 'react-toastify';
 
 const SignUp = () => {
   const navigate = useNavigate();
+    // ==========================
   // STATE FOR PASSWORD VISIBILITY
+    // ==========================
   const [show, setShow] = useState(false);
+    // ==========================
   // STATE FOR FORM FIELDS
+    // ==========================
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+    // ==========================
   // DESTRUCTURING FORM OBJECT
+    // ==========================
   const { name, email, password } = formData;
+    // ==========================
   // WHEN ICON CLICKED CHANGE VISIBILITY OF PASSWORD
+    // ==========================
   const clicked = () => {
     setShow(!show);
   };
+    // ==========================
   // ONCHANGE FUNCTION FOR STATES
+    // ==========================
   const onChange = (e) => {
     setFormData((previousState) => {
       return {
@@ -36,20 +46,28 @@ const SignUp = () => {
       };
     });
   };
+    // ==========================
   // ON SUBMIT FUNCTION FOR FORM
+    // ==========================
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
+        // ==========================
       // Get the Auth function from /auth
+        // ==========================
       const auth = getAuth();
+        // ==========================
       // Create the authentication using auth, Email and Password
+        // ==========================
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+        // ==========================
       // Updating the current user to add a display name
-      const newUser = await updateProfile(auth.currentUser, {
+        // ==========================
+       await updateProfile(auth.currentUser, {
         displayName: name,
       });
       //
