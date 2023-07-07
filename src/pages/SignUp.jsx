@@ -1,27 +1,69 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../Components/OAuth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { db } from "./../firebase";
+import { serverTimestamp, setDoc, doc } from "firebase/firestore";
+import {toast} from 'react-toastify';
+
 const SignUp = () => {
+  const navigate = useNavigate();
+  // STATE FOR PASSWORD VISIBILITY
   const [show, setShow] = useState(false);
+  // STATE FOR FORM FIELDS
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+  // DESTRUCTURING FORM OBJECT
   const { name, email, password } = formData;
+  // WHEN ICON CLICKED CHANGE VISIBILITY OF PASSWORD
   const clicked = () => {
     setShow(!show);
   };
+  // ONCHANGE FUNCTION FOR STATES
   const onChange = (e) => {
-    console.log(e.target);
     setFormData((previousState) => {
       return {
         ...previousState,
         [e.target.id]: e.target.value,
       };
     });
-    console.log(formData);
+  };
+  // ON SUBMIT FUNCTION FOR FORM
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Get the Auth function from /auth
+      const auth = getAuth();
+      // Create the authentication using auth, Email and Password
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      // Updating the current user to add a display name
+      const newUser = await updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+      //
+      const user = userCredentials.user;
+      console.log(user);
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timeStamp = serverTimestamp();
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+      toast.success('Successfully Logged In')
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -42,7 +84,7 @@ const SignUp = () => {
         </div>
         {/* Div For Form */}
         <div className=" w-full md:w-[67%] lg:w-[40%]">
-          <form className="">
+          <form onSubmit={onSubmit}>
             {/* Input Name */}
             <input
               className="w-full px-4 py-2 text-xl mb-2 text-gray-700 bg-white border-gray-300 rounded-md
@@ -147,7 +189,7 @@ const SignUp = () => {
                 OR
               </p>
             </div>
-          <OAuth />
+            <OAuth />
           </form>
         </div>
       </div>
