@@ -95,6 +95,31 @@ const Profile = () => {
             Sign out
           </p>
         </div>
+        <button
+        type="button"
+        onClick={()=>{navigate('/create-listing')}}
+          className=" bg-blue-600 text-white w-full px-3 py-2 lg:px-7 lg:py-3
+          lg:text-sm
+               rounded-md mt-3 text-xs font-medium uppercase shadow-md
+             hover:bg-blue-700 transition duration-200 ease-in-out
+              hover:shadow-lg active:bg-blue-800 flex justify-center items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 mr-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+          SELL OR RENT YOUR HOME
+        </button>
       </div>
     </section>
   );
