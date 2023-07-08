@@ -26,7 +26,7 @@ const Header = () => {
   const [loggedIn, setLoggedIn] = useState("SIGN IN");
   // Return Statement
   return (
-    <div className="shadow-sm bg-white border-b sticky top-0 z-50">
+    <div className="shadow-sm bg-white border-b sticky top-0 z-49">
       {/* Header Component */}
       <header className=" flex justify-between items-center px-3    max-w-6xl mx-auto">
         {/* Div Containing Logo */}

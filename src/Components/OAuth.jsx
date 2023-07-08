@@ -28,11 +28,11 @@ export default function OAuth() {
           email: user.email,
           timeStamp: serverTimestamp(),
         });
-        navigate("/");
-        toast.success('Successfully Loged In')
       } else {
         
       }
+      navigate("/");
+      toast.success('Successfully Loged In')
     } catch (error) {
       toast.error(error.message);
     }
