@@ -1,9 +1,8 @@
-import { getAuth, updateCurrentUser, updateProfile } from "firebase/auth";
-
+import { getAuth, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const Profile = () => {
