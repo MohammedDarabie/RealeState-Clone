@@ -169,12 +169,15 @@ const Profile = () => {
         </button>
       </div>
       <div className="max-w-6xl px-3 mt-6 mx-auto">
-        <h1 className=" text-center mt-6 text-3xl font-bold font-mono ">
+        <h1 className=" text-center mt-6 text-3xl font-bold font-mono mb-6 ">
           My List
         </h1>
         {!loading && listings.length > 0 && (
           <>
-            <ul>
+            <ul
+              className="sm:grid sm:grid-cols-2 lg:grid-cols-3
+             xl:grid-cols-4 2xl:grid-cols-5 mt-6 mb-6"
+            >
               {listings.map((listing) => {
                 return (
                   <ListingItem
