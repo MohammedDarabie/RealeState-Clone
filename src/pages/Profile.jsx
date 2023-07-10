@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   collection,
+  deleteDoc,
   doc,
   getDocs,
   orderBy,
@@ -87,6 +88,22 @@ const Profile = () => {
     }
     fetchUserListings();
   }, [auth.currentUser.uid]);
+  //=====================================================
+  // ================= OnDelete & OnEdit ================
+  // ====================================================
+  function onEdit(listingId) {
+    navigate(`/edit-listing/${listingId}`);
+  }
+  async function onDelete(listingId) {
+    if (window.confirm("Are you sure you want to delete this?")) {
+      await deleteDoc(doc(db, "listings", listingId));
+      const updatedList = listings.filter(
+        (listing) => listing.id !== listingId
+      );
+      setListings(updatedList);
+      toast.success("Successfully Deleted");
+    }
+  }
   //=====================================================
   // ================= Return ===========================
   // ====================================================
@@ -184,6 +201,8 @@ const Profile = () => {
                     key={listing.id}
                     listing={listing.data}
                     id={listing.id}
+                    onDelete={() => onDelete(listing.id)}
+                    onEdit={() => onEdit(listing.id)}
                   />
                 );
               })}
